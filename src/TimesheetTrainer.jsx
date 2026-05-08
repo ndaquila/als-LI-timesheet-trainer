@@ -32,7 +32,7 @@ const US_STATES = ["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","
 
 const TIPS = {
   visitDate: "Enter the date your shift STARTED (the morning you arrived). For a live-in shift, this is always the morning date — even though your sleep break extends into the following day.",
-  empId: "Your 4-digit Employee ID from your offer letter or most recent pay stub. Contact your scheduler if unsure.",
+  empId: "Your Employee ID from your offer letter or most recent pay stub. Contact your scheduler if unsure.",
   scheduledHours: "Select ONLY the hours on your Letter of Assignment (LOA) for this client — NOT 24. Your LOA specifies 10, 11, or 12 paid hours.",
   dailyTasks: "Check EVERY task performed this visit. These must match the client's authorized care plan. Under-documenting is a billing and compliance risk.",
   begin: "The exact time you arrived and began client care. ⚠️ ALWAYS double-check AM vs PM — this is the #1 error caregivers make.",
@@ -972,6 +972,31 @@ export default function TimesheetTrainer() {
                 <div style={{display:"flex",gap:"16px"}}>
                   <JFRadio label="Yes" val="yes" current={firstLast} setter={setFirstLast} name="firstlast"/>
                   <JFRadio label="No"  val="no"  current={firstLast} setter={setFirstLast} name="firstlast"/>
+                </div>
+                <div style={{
+                  marginTop:"12px",background:"#fff8e1",border:"1px solid #ffe082",
+                  borderLeft:"3px solid #f59e0b",borderRadius:"4px",
+                  padding:"12px 14px",fontSize:"13px",color:"#6d4c00",lineHeight:"1.65",
+                }}>
+                  <div style={{fontWeight:"700",marginBottom:"6px"}}>
+                    💡 Why this question matters — Partial Day Hours
+                  </div>
+                  <div style={{marginBottom:"8px"}}>
+                    This question helps calculate accurate hours for caregivers who work fewer
+                    hours than their Visit Type hours on their LOA (a partial day).
+                  </div>
+                  <div style={{display:"flex",flexDirection:"column",gap:"6px"}}>
+                    <div style={{background:"rgba(255,255,255,0.6)",borderRadius:"3px",padding:"8px 10px"}}>
+                      <strong style={{color:"#e65100"}}>Answer NO</strong>
+                      {" — If you worked less than your Visit Type hours and this is not the first or last day on this client, your hours for that day will be "}
+                      <strong>rounded up to the full Visit Type hours.</strong>
+                    </div>
+                    <div style={{background:"rgba(255,255,255,0.6)",borderRadius:"3px",padding:"8px 10px"}}>
+                      <strong style={{color:"#1565c0"}}>Answer YES</strong>
+                      {" — If you worked less than your Visit Type hours and this is the first or last day on this client, your hours will "}
+                      <strong>remain as entered — no rounding up.</strong>
+                    </div>
+                  </div>
                 </div>
               </JFField>
 
