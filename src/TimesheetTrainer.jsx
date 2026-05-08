@@ -922,40 +922,6 @@ export default function TimesheetTrainer() {
                 ★ <strong>Please review all times you input above and confirm AM or PM before submitting your timesheet.</strong>
               </div>
 
-              {/* ── Calculated Fields ── */}
-              <JFSectionHeader label="Calculated Hours" sub="Auto-computed from your entries above"/>
-              {showTips && (
-                <div style={{
-                  background:"#fff8e1",border:"1px solid #ffe082",
-                  borderLeft:"3px solid #f59e0b",borderRadius:"4px",
-                  padding:"10px 14px",marginBottom:"16px",
-                  fontSize:"12.5px",color:"#6d4c00",
-                }}>💡 {TIPS.calcs}</div>
-              )}
-              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"0 16px"}}>
-                <CalcField label="Total Unpaid Hours (Off Duty)" value={fmtH(calcs.brkM)}/>
-                <CalcField label="Unpaid Sleep Hours" value={fmtH(calcs.unpaidSleepM)}/>
-                <CalcField label="Paid Sleep Hours" value={fmtH(calcs.paidSleepM)} hi={calcs.paidSleepM>0}/>
-                <CalcField label="Total Interruption Time" value={fmtH(calcs.intM)} hi={calcs.intM>0}/>
-                <CalcField label="Total Hours (On Duty)" value={fmtH(calcs.onDutyM)}/>
-                <CalcField
-                  label="Total Hours Worked"
-                  value={fmtH(calcs.onDutyM)}
-                  hi={calcs.onDutyM>0&&(!schedHrs||calcs.onDutyM<=parseInt(schedHrs||12)*60+30)}
-                  warn={!!schedHrs&&calcs.onDutyM>parseInt(schedHrs)*60+30}
-                />
-              </div>
-              {schedHrs && calcs.onDutyM>0 && (
-                <div style={{
-                  padding:"10px 14px",background:"#f0f9ff",border:"1px solid #bae6fd",
-                  borderRadius:"4px",fontSize:"13px",color:"#0369a1",marginBottom:"20px",
-                }}>
-                  LOA scheduled: <strong>{schedHrs} hrs</strong> &nbsp;·&nbsp;
-                  Calculated worked: <strong>{fmtH(calcs.onDutyM)}</strong>
-                  {calcs.intM>0&&` (includes ${fmtH(calcs.intM)} paid interruption time)`}
-                </div>
-              )}
-
               {/* ── Signatures ── */}
               <JFSectionHeader label="Signatures"/>
               <SignaturePad label="Caregiver Signature"/>
